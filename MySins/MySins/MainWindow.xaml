@@ -271,9 +271,20 @@
         <Image
             Grid.Column="1"
             Grid.Row="0"
-            Source="/Images/Smile.png"/>
+            x:Name="Normal"
+            Source="Images/Normal.png"/>
 
+        <Image
+            Grid.Column="1"
+            Grid.Row="0"
+            x:Name="Sad"
+            Source="Images/Sad.png"/>
 
+        <Image
+            Grid.Column="1"
+            Grid.Row="0"
+            x:Name="Smile"
+            Source="Images/Smile.png"/>
 
         <Grid.Background>
             <ImageBrush ImageSource="/MySins;component/Images/heaven.png" />

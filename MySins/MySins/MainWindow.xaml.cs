@@ -24,6 +24,7 @@ namespace MySins
         {
             InitializeComponent();
             _ = GoogleModel();
+
         }
 
         public static string LoadApiKey()
@@ -42,7 +43,7 @@ namespace MySins
             var googleApiKey = new GoogleAi(ApiKeyFromFile);
             var model = googleApiKey.CreateGenerativeModel("models/gemini-2.0-flash-lite");
             chatSession = model.StartChat();
-            var baseResponse = await chatSession.GenerateContentAsync("Я зараз буду описувати тобі гріхи по черзі, а ти мусиш відповідати лише T/F чи це є гріхом чи ні. Надавай відповіді згідно християнської етики. Не потрібно відповідати на це повідомлення");
+            var baseResponse = await chatSession.GenerateContentAsync("Я зараз буду описувати тобі гріхи по черзі, а ти мусиш відповідати лише T/F чи це є гріхом чи ні. Надавай відповіді згідно християнської етики. У відповідь на це повідомлення дай лише відповідь - Зрозуміло. А далі лише відповідай T або F і нічого інакше. ");
             Debug.WriteLine(baseResponse.Text());
         }
 
@@ -93,12 +94,13 @@ namespace MySins
             TextBox box = targetBox;
             if(answer != null)
             {
-                if (answer == "T")
+                if (answer.Trim() == "T")
                 {
                     sinsCount++;
                     Debug.WriteLine(sinsCount);
+                    SmileChanges(sinsCount);
                 }
-                else if(answer == "F")
+                else if (answer.Trim() == "F")
                 {
                     box.IsReadOnly = false;
                 }
@@ -106,6 +108,26 @@ namespace MySins
                 {
                     //вікно з введи гріх нормально даун
                 }
+            }
+        }
+
+        private void SmileChanges(int targetCount)
+        {
+            if(targetCount <= 4)
+            {
+                Smile.Visibility = Visibility.Visible;
+                Normal.Visibility = Visibility.Hidden;
+                Sad.Visibility = Visibility.Hidden;
+            }
+            else if(targetCount >= 5 && targetCount <= 8)
+            {
+                Smile.Visibility = Visibility.Hidden;
+                Normal.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Normal.Visibility = Visibility.Hidden;
+                Sad.Visibility = Visibility.Visible;
             }
         }
     }
