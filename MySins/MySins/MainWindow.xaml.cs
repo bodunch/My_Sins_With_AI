@@ -1,5 +1,9 @@
 ﻿using GenerativeAI;
+using GenerativeAI.Types;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,9 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.IO;
 
 namespace MySins
 {
@@ -24,7 +25,6 @@ namespace MySins
         {
             InitializeComponent();
             _ = GoogleModel();
-
         }
 
         public static string LoadApiKey()
@@ -42,7 +42,14 @@ namespace MySins
             string ApiKeyFromFile = LoadApiKey();
             var googleApiKey = new GoogleAi(ApiKeyFromFile);
             var model = googleApiKey.CreateGenerativeModel("models/gemini-2.0-flash-lite");
-            chatSession = model.StartChat();
+            chatSession = model.StartChat(new List<Content>
+            {
+                new Content
+                {
+                    Role = "user",
+                    Parts = new List<Part>{new Part{Text ="Ти відповідаєш виключно 'T' або 'F'. Ніколи не додаєш пояснень. Якщо питання не дозволяє відповісти 'T/F' — відповідай 'F'."}}
+                }
+            });
             var baseResponse = await chatSession.GenerateContentAsync("Я зараз буду описувати тобі гріхи по черзі, а ти мусиш відповідати лише T/F чи це є гріхом чи ні. Надавай відповіді згідно християнської етики. У відповідь на це повідомлення дай лише відповідь - Зрозуміло. А далі лише відповідай T або F і нічого інакше. ");
             Debug.WriteLine(baseResponse.Text());
         }
@@ -81,7 +88,7 @@ namespace MySins
                 return;
             }
 
-            var responce = await chatSession.GenerateContentAsync(message);
+            var responce = await chatSession.GenerateContentAsync($"Нагадую, відповідай лише T або F. Більше нічого. Гріх: {message}");
 
             string reply = responce.Text();
             SinCounting(reply, box);
@@ -98,36 +105,47 @@ namespace MySins
                 {
                     sinsCount++;
                     Debug.WriteLine(sinsCount);
-                    SmileChanges(sinsCount);
+                    EmojesAndBackgroundChanges(sinsCount);
                 }
                 else if (answer.Trim() == "F")
                 {
                     box.IsReadOnly = false;
+
+                    //забрати це звідси нахуй в низ
+                    MessageWindow openWindow = new MessageWindow();
+                    openWindow.Show();
                 }
                 else
                 {
+                    
                     //вікно з введи гріх нормально даун
                 }
             }
         }
 
-        private void SmileChanges(int targetCount)
+        private void EmojesAndBackgroundChanges(int targetCount)
         {
             if(targetCount <= 4)
             {
                 Smile.Visibility = Visibility.Visible;
                 Normal.Visibility = Visibility.Hidden;
                 Sad.Visibility = Visibility.Hidden;
+
+                Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/heaven.png"));
             }
             else if(targetCount >= 5 && targetCount <= 8)
             {
                 Smile.Visibility = Visibility.Hidden;
                 Normal.Visibility = Visibility.Visible;
+
+                Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/so so.png"));
             }
             else
             {
                 Normal.Visibility = Visibility.Hidden;
                 Sad.Visibility = Visibility.Visible;
+
+                Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/hell.png"));
             }
         }
     }

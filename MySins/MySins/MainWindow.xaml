@@ -14,10 +14,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border 
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="10">
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
                             <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
                     </ControlTemplate>
@@ -26,10 +26,10 @@
         </Style>
 
         <Style TargetType="Button" x:Key="HoverButton">
-            <Setter Property="Background" Value="#CC86744B"/>
-            <Setter Property="Foreground" Value="#ecd7a6"/>
-            <Setter Property="BorderBrush" Value="#CC86744B"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#CC757575"/>
+            <Setter Property="Foreground" Value="#FFA2A2A2"/>
+            <Setter Property="BorderBrush" Value="#CC4E4E4E"/>
+            <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="FontFamily" Value="Ebrima"/>
             <Setter Property="Template">
@@ -46,13 +46,12 @@
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#dd9b613c"/>
+                                <Setter TargetName="border" Property="Background" Value="#99757575"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#CC86744B"/>
+                                <Setter TargetName="border" Property="Background" Value="#99757575"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -97,9 +96,9 @@
             Grid.Column="1"
             Grid.Row="2"
             x:Name="Box0"
-            BorderThickness="1"
+            BorderThickness="2"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -115,7 +114,8 @@
             Grid.Row="4"
             x:Name="Box1"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -130,7 +130,8 @@
             Grid.Row="6"
             x:Name="Box2"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -145,7 +146,8 @@
             Grid.Row="8"
             x:Name="Box3"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -160,7 +162,8 @@
             Grid.Row="10"
             x:Name="Box4"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -175,7 +178,8 @@
             Grid.Row="12"
             x:Name="Box5"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -190,7 +194,8 @@
             Grid.Row="14"
             x:Name="Box6"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -205,7 +210,8 @@
             Grid.Row="16"
             x:Name="Box7"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -220,7 +226,8 @@
             Grid.Row="18"
             x:Name="Box8"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -235,7 +242,8 @@
             Grid.Row="20"
             x:Name="Box9"
             Background="#80FFFFFF"
-            BorderBrush="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            BorderThickness="2"
             Foreground="Black"
             FontSize="18"
             FontFamily="Arial"
@@ -287,8 +295,9 @@
             Source="Images/Smile.png"/>
 
         <Grid.Background>
-            <ImageBrush ImageSource="/MySins;component/Images/heaven.png" />
+            <ImageBrush 
+                x:Name="Background"
+                ImageSource="/Images/heaven.png" />
         </Grid.Background>
-
     </Grid>
 </Window>

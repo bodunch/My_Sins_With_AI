@@ -10,9 +10,12 @@
 
   <ItemGroup>
     <None Remove="Images\heaven.png" />
+    <None Remove="Images\hell.png" />
+    <None Remove="Images\MessageWindow.png" />
     <None Remove="Images\Normal.png" />
     <None Remove="Images\Sad.png" />
     <None Remove="Images\Smile.png" />
+    <None Remove="Images\so so.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,9 +24,12 @@
 
   <ItemGroup>
     <Resource Include="Images\heaven.png" />
+    <Resource Include="Images\hell.png" />
+    <Resource Include="Images\MessageWindow.png" />
     <Resource Include="Images\Normal.png" />
     <Resource Include="Images\Sad.png" />
     <Resource Include="Images\Smile.png" />
+    <Resource Include="Images\so so.png" />
   </ItemGroup>
 
 </Project>
