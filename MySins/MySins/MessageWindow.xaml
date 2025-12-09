@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MySins"
         mc:Ignorable="d"
-        Title="MessageWindow" Height="678" Width="352"
+        Title="MessageWindow" Height="200" Width="352"
         ResizeMode="NoResize">
     
     <Grid>
@@ -22,6 +22,8 @@
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
 
+        
+
         <Button 
             Grid.Column="1"
             Grid.Row="1"
@@ -32,12 +34,18 @@
         <StackPanel 
             Grid.Column="1"
             Grid.Row="3">
-            <TextBlock Text="Прихований контент" />
+            <TextBlock
+                TextWrapping="Wrap">
+                Вот ти взагалі одно-хромосомний, що тобі не зрозуміло що потрібно вписувати гріхи, а не якусь бурду. 
+                Просто подумай наскільки твоє життя взагалі немає сенсу що тобі доводиться проводити свій час у цій на колінці зробленій програмі.
+                Ти просто безкорисний шматок суспільства незаслуговуючий на вислуховування навіть цієї програмки. 
+            </TextBlock>
         </StackPanel>
 
         <Grid.Background>
             <ImageBrush 
                 x:Name="Background"
+                Stretch="Fill"
                 ImageSource="/Images/MessageWindow.png" />
         </Grid.Background>
     </Grid>

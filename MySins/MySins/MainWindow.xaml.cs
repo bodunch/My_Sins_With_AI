@@ -41,7 +41,7 @@ namespace MySins
         {
             string ApiKeyFromFile = LoadApiKey();
             var googleApiKey = new GoogleAi(ApiKeyFromFile);
-            var model = googleApiKey.CreateGenerativeModel("models/gemini-2.0-flash-lite");
+            var model = googleApiKey.CreateGenerativeModel("models/gemini-2.5-flash");
             chatSession = model.StartChat(new List<Content>
             {
                 new Content
@@ -111,14 +111,13 @@ namespace MySins
                 {
                     box.IsReadOnly = false;
 
-                    //забрати це звідси нахуй в низ
+                    //це кароч тут якщо геміні ахуєє і видасть якесь дерьмо
                     MessageWindow openWindow = new MessageWindow();
                     openWindow.Show();
                 }
                 else
                 {
                     
-                    //вікно з введи гріх нормально даун
                 }
             }
         }

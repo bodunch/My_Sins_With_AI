@@ -27,17 +27,15 @@ namespace MySins
         {
             if (!isExpanded)
             {
-                // розкриваємо вікно повністю
-                this.Height = 678;   // або будь-яка потрібна висота
-                HiddenRow.Height = new GridLength(3, GridUnitType.Star); // робимо прихований рядок видимим
-                ShowHiddenPart.Content = "Згорнути"; // змінюємо текст кнопки
+                this.Height = 400;   
+                HiddenRow.Height = new GridLength(3, GridUnitType.Star); 
+                ShowHiddenPart.Content = "Згорнути"; 
                 isExpanded = true;
             }
             else
             {
-                // згортаємо назад
-                this.Height = 200;   // початкова висота
-                HiddenRow.Height = new GridLength(0); // прихований рядок знову 0
+                this.Height = 200;   
+                HiddenRow.Height = new GridLength(0); 
                 ShowHiddenPart.Content = "Показати";
                 isExpanded = false;
             }
