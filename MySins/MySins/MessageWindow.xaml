@@ -7,7 +7,33 @@
         mc:Ignorable="d"
         Title="MessageWindow" Height="200" Width="352"
         ResizeMode="NoResize">
-    
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="NoChangeButton">
+            <Setter Property="Background" Value="#00FFFFFF"/>
+            <Setter Property="Foreground" Value="#1E90FF"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="border"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#00FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#00FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -22,13 +48,24 @@
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
 
-        
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="0"
+            Text="Please enter the password correctly, no need to try to break the program!"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"/>
 
         <Button 
             Grid.Column="1"
             Grid.Row="1"
+            Style="{StaticResource NoChangeButton}"
+            Background="#00FFFFFF"
+            BorderThickness="0"
             x:Name="ShowHiddenPart"
-            Content="Показати" 
+            Content="⌄read more⌄" 
             Click="Toggle_Click" />
 
         <StackPanel 
@@ -36,9 +73,11 @@
             Grid.Row="3">
             <TextBlock
                 TextWrapping="Wrap">
-                Вот ти взагалі одно-хромосомний, що тобі не зрозуміло що потрібно вписувати гріхи, а не якусь бурду. 
-                Просто подумай наскільки твоє життя взагалі немає сенсу що тобі доводиться проводити свій час у цій на колінці зробленій програмі.
-                Ти просто безкорисний шматок суспільства незаслуговуючий на вислуховування навіть цієї програмки. 
+                My friend, if you managed to get the AI assistant to give you incorrect answers, then 
+                I (the programmer who created this application) think that you are doing something wrong with your life. 
+                Try walking on the grass, taking a walk, even if just a little, get a girlfriend, a dog, a child. 
+                You don't need this kind of life, look for something good. It's not worth your time and space on your computer. 
+                Delete this program and relax a little. 
             </TextBlock>
         </StackPanel>
 

@@ -28,15 +28,15 @@ namespace MySins
             if (!isExpanded)
             {
                 this.Height = 400;   
-                HiddenRow.Height = new GridLength(3, GridUnitType.Star); 
-                ShowHiddenPart.Content = "Згорнути"; 
+                HiddenRow.Height = new GridLength(1.5, GridUnitType.Star); 
+                ShowHiddenPart.Content = "⌃close⌃"; 
                 isExpanded = true;
             }
             else
             {
                 this.Height = 200;   
                 HiddenRow.Height = new GridLength(0); 
-                ShowHiddenPart.Content = "Показати";
+                ShowHiddenPart.Content = "⌄read more⌄";
                 isExpanded = false;
             }
         }
