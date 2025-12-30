@@ -23,17 +23,21 @@ namespace MySins
 
         public MainWindow()
         {
-            InitializeComponent();
-            _ = GoogleModel();
+            //надбудова щоб ця хуйня не запускала основне вікно без перевірки
+            if (!File.Exists("My_API_Key.txt"))
+            {
+                new MessageWindowNoAPIKey().Show();
+                Close();
+                return;
+            }
+           
+             InitializeComponent();
+             _ = GoogleModel();
         }
 
         public static string LoadApiKey()
         {
             string filePath = "My_API_Key.txt";
-            if(!File.Exists(filePath))
-            {
-                return "";
-            }
             return File.ReadAllText(filePath).Trim();
         }
 
@@ -66,11 +70,11 @@ namespace MySins
                 TextBox_LostFocus(sender, e);
                 var request = new TraversalRequest(FocusNavigationDirection.Next);
 
-                TextBox box = sender as TextBox;
-                string text = box.Text;
+                TextBox? box = sender as TextBox;
+                string? text = box.Text;
                 box.IsReadOnly = true;
 
-                UIElement element = sender as UIElement;
+                UIElement? element = sender as UIElement;
                 if (element != null)
                 {
                     element.MoveFocus(request);
@@ -90,7 +94,7 @@ namespace MySins
 
             var responce = await chatSession.GenerateContentAsync($"Нагадую, відповідай лише T або F. Більше нічого. Гріх: {message}");
 
-            string reply = responce.Text();
+            string? reply = responce.Text();
             SinCounting(reply, box);
 
             Debug.WriteLine(reply);
@@ -110,14 +114,12 @@ namespace MySins
                 else if (answer.Trim() == "F")
                 {
                     box.IsReadOnly = false;
-
-                    //це кароч тут якщо геміні ахуєє і видасть якесь дерьмо
-                    MessageWindow openWindow = new MessageWindow();
-                    openWindow.Show();
                 }
                 else
                 {
-                    
+                    //це кароч тут якщо геміні ахуєє і видасть якесь дерьмо
+                    MessageWindow openWindow = new MessageWindow();
+                    openWindow.Show();
                 }
             }
         }
@@ -146,6 +148,12 @@ namespace MySins
 
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/hell.png"));
             }
+        }
+
+        private void ImmaConfess_Click(object sender, RoutedEventArgs e)
+        {
+            YesNoConfess window = new YesNoConfess();
+            window.Show();
         }
     }
 }

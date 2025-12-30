@@ -1,0 +1,64 @@
+﻿<Window x:Class="MySins.MessageWindowNoAPIKey"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MySins"
+        mc:Ignorable="d"
+        Title="MessageWindowNoAPIKey" Height="678" Width="352"
+        ResizeMode="NoResize">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Column="1"
+            Grid.Row="1"
+            Text="error: No access to API key"
+            FontFamily="Arial"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontSize="22"/>
+
+        <TextBlock 
+            Grid.Column="1"
+            Grid.Row="3"
+            Text="For more detailed information, please refer to our repository on GitHub:"
+            FontFamily="Arial"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            FontSize="15"/>
+
+        <TextBlock 
+            Grid.Column="1"
+            Grid.Row="4"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            FontSize="15">
+            <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/bodunch/My_Sins_With_AI">link</Hyperlink>
+        </TextBlock>
+
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="/Images/MessageWindow.png"/>
+        </Grid.Background>
+    </Grid>
+</Window>

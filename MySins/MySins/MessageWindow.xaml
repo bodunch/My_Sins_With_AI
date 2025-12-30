@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:MySins"
         mc:Ignorable="d"
         Title="MessageWindow" Height="200" Width="352"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="#f3ba00">
 
     <Window.Resources>
         <Style TargetType="Button" x:Key="NoChangeButton">
@@ -81,11 +82,6 @@
             </TextBlock>
         </StackPanel>
 
-        <Grid.Background>
-            <ImageBrush 
-                x:Name="Background"
-                Stretch="Fill"
-                ImageSource="/Images/MessageWindow.png" />
-        </Grid.Background>
+        
     </Grid>
 </Window>

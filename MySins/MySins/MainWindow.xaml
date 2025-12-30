@@ -27,11 +27,13 @@
 
         <Style TargetType="Button" x:Key="HoverButton">
             <Setter Property="Background" Value="#CC757575"/>
-            <Setter Property="Foreground" Value="#FFA2A2A2"/>
+            <Setter Property="Foreground" Value="#FF382D15"/>
             <Setter Property="BorderBrush" Value="#CC4E4E4E"/>
             <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="FontFamily" Value="Ebrima"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Heavy"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -257,9 +259,11 @@
         <Button
             Grid.Column="1"
             Grid.Row="22" 
+            x:Name="ImmaConfess"
             Width="200"
             Style="{StaticResource HoverButton}"
-            Content="calculate"/>
+            Content="I Confess My Sins" 
+            Click="ImmaConfess_Click"/>
 
         <Button
             Grid.Column="0"
@@ -268,6 +272,7 @@
             Style="{StaticResource HoverButton}"
             HorizontalAlignment="Right"
             Content="S"/>
+        
         <Button
             Grid.Column="2"
             Grid.Row="22" 
