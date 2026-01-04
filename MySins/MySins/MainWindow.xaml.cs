@@ -75,7 +75,7 @@ namespace MySins
                 box.IsReadOnly = true;
 
                 UIElement? element = sender as UIElement;
-                if (element != null)
+                if (element != null && element is TextBox)
                 {
                     element.MoveFocus(request);
                 }
@@ -153,7 +153,9 @@ namespace MySins
         private void ImmaConfess_Click(object sender, RoutedEventArgs e)
         {
             YesNoConfess window = new YesNoConfess();
+            window.Owner = this;
             window.Show();
+            ImmaConfess.IsEnabled = false;
         }
     }
 }

@@ -23,5 +23,29 @@ namespace MySins
         {
             InitializeComponent();
         }
+
+        private void YepImmaConfess(object sender, RoutedEventArgs e)
+        {
+            CloseAndEnabledWindow();
+        }
+
+        private void NoImmaNotConfess(object sender, RoutedEventArgs e)
+        {
+            CloseAndEnabledWindow();
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            CloseAndEnabledWindow();
+        }
+
+        private void CloseAndEnabledWindow()
+        {
+            if (Owner is MainWindow mainWindow)
+            {
+                mainWindow.ImmaConfess.IsEnabled = true;
+            }
+            Close();
+        }
     }
 }
