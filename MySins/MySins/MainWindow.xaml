@@ -60,7 +60,13 @@
             </Setter>
         </Style>
     </Window.Resources>
-
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="40"
+            ResizeBorderThickness="0"
+            GlassFrameThickness="0"
+            CornerRadius="15"/>
+    </WindowChrome.WindowChrome>
 
     <Grid OpacityMask="#FF353131">
         <Grid.ColumnDefinitions>
@@ -96,12 +102,11 @@
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
 
-        <Frame
-            Grid.Column="0"
+        <Grid
             Grid.Row="0"
             Grid.ColumnSpan="3"
             Background="#80B8B8B8"
-            Margin="0, 0, 0, 5"/>
+            />
 
         <TextBox
             Grid.Column="1"
@@ -273,6 +278,7 @@
             Foreground="White"
             FontFamily="Consolas"
             FontSize="18"
+            FontWeight="Heavy"
             VerticalAlignment="Center"
             Margin="20, 0, 0, 5"
             />
@@ -284,10 +290,11 @@
             Height="30"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Margin="0, 2.3, 0, 0"
+            Margin="0, 5, 6.5, 0"
             Content="X"
             Style="{StaticResource HoverButton}"
             Click="ProgramExit"
+            WindowChrome.IsHitTestVisibleInChrome="True"
             />
         
         <Button

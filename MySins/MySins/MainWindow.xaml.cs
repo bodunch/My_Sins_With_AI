@@ -162,5 +162,11 @@ namespace MySins
         {
             Application.Current.Shutdown();
         }
+
+        private void WindowControl(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
     }
 }
