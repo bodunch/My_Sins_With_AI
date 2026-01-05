@@ -23,12 +23,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border 
-                    x:Name="border"
-                    Background="{TemplateBinding Background}"
-                    CornerRadius="10"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
                         <ControlTemplate.Triggers>
@@ -97,7 +97,7 @@
             Content="X"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
-            Click="CloseWindow"/>
-
+            Click="CloseWindow"
+            Style="{StaticResource HoverButton}"/>
     </Grid>
 </Window>

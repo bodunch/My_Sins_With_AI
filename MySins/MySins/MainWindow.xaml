@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:MySins"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="512"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStyle="None">
 
     <Window.Resources>
         <Style x:Key="RoundedTextBox" TargetType="TextBox">
@@ -68,7 +69,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="1*"/>
@@ -94,6 +95,13 @@
             <RowDefinition Height="1.3*"/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
+
+        <Frame
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Background="#80B8B8B8"
+            Margin="0, 0, 0, 5"/>
 
         <TextBox
             Grid.Column="1"
@@ -257,15 +265,29 @@
             IsReadOnly="False"
             />
 
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Text="Your Sins"
+            Foreground="White"
+            FontFamily="Consolas"
+            FontSize="18"
+            VerticalAlignment="Center"
+            Margin="20, 0, 0, 5"
+            />
+
         <Button
             Grid.Column="2"
             Grid.Row="0"
-            Grid.RowSpan="2"
             Width="30"
             Height="30"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Content="X" 
+            Margin="0, 2.3, 0, 0"
+            Content="X"
+            Style="{StaticResource HoverButton}"
+            Click="ProgramExit"
             />
         
         <Button

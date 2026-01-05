@@ -157,5 +157,10 @@ namespace MySins
             window.Show();
             ImmaConfess.IsEnabled = false;
         }
+
+        private void ProgramExit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
