@@ -18,6 +18,7 @@ namespace MySins
 {
     public partial class MainWindow : Window
     {
+        public int usedTextBoxesCount = 0;
         public int sinsCount = 0;
         private ChatSession chatSession;
 
@@ -60,17 +61,25 @@ namespace MySins
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            (sender as TextBox).ScrollToHome();
+            if (sender is TextBox box)
+            {
+                box.ScrollToHome();
+            }
         }
 
         private async void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (usedTextBoxesCount < 9)
             {
+                if (e.Key != Key.Enter)
+                    return;
+
+                if (sender is not TextBox box)
+                    return;
+
                 TextBox_LostFocus(sender, e);
                 var request = new TraversalRequest(FocusNavigationDirection.Next);
 
-                TextBox? box = sender as TextBox;
                 string? text = box.Text;
                 box.IsReadOnly = true;
 
@@ -78,9 +87,23 @@ namespace MySins
                 if (element != null && element is TextBox)
                 {
                     element.MoveFocus(request);
+                    
+                    
                 }
-                await SinToBot(text, box);
+
+                //await SinToBot(text, box);
             }
+            else if (usedTextBoxesCount == 10)
+            {
+                if (sender is not TextBox box)
+                    return;
+                string? text = box.Text;
+                box.IsReadOnly = true;
+                Debug.WriteLine("Визиваєтсья");
+                //await SinToBot(text, box);
+            }
+            usedTextBoxesCount++;
+            Debug.WriteLine(usedTextBoxesCount);
         }
 
         private async Task SinToBot(string message, TextBox targetBox)

@@ -117,7 +117,7 @@
             BorderBrush="#807D7D7D"
             Foreground="Black"
             FontSize="18"
-            FontFamily="Arial"
+            FontFamily="Consolas"
             TextWrapping="Wrap"
             LostFocus="TextBox_LostFocus"
             Style="{StaticResource RoundedTextBox}"
