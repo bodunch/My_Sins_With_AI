@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace MySins
 {
@@ -188,6 +189,37 @@ namespace MySins
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
+        }
+
+        public void ManConfess()
+        {
+            usedTextBoxesCount = 0;
+            sinsCount = 0;
+            Box0.Focus();
+            Box0.Select(0, 0);
+            List<TextBox> allTextBoxes = FindVisualChildren<TextBox>(this).ToList();
+            foreach(var textbox in allTextBoxes)
+            {
+                textbox.IsReadOnly = false;
+                textbox.Text = "";
+            }
+        }
+
+
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject parent) where T : DependencyObject
+        {
+            if (parent != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                    if (child is T)
+                        yield return (T)child;
+
+                    foreach (T grandChild in FindVisualChildren<T>(child))
+                        yield return grandChild;
+                }
+            }
         }
     }
 }

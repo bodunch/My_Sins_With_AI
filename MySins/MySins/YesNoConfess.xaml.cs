@@ -26,6 +26,10 @@ namespace MySins
 
         private void YepImmaConfess(object sender, RoutedEventArgs e)
         {
+            if(Owner is MainWindow mainWindow)
+            {
+                mainWindow.ManConfess();
+            }
             CloseAndEnabledWindow();
         }
 
