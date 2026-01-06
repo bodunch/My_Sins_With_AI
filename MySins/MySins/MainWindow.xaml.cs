@@ -87,8 +87,6 @@ namespace MySins
                 if (element != null && element is TextBox)
                 {
                     element.MoveFocus(request);
-                    
-                    
                 }
 
                 //await SinToBot(text, box);
