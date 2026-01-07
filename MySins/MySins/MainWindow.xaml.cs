@@ -15,6 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
 
+
+//якщо не гріх або якщо нічого не ввів, то очистити поле
+//вікно про випадок коли не підлкючена AI
+
 namespace MySins
 {
     public partial class MainWindow : Window
@@ -78,6 +82,9 @@ namespace MySins
                 if (sender is not TextBox box)
                     return;
 
+                if (box.Text == "")
+                    return;
+
                 TextBox_LostFocus(sender, e);
                 var request = new TraversalRequest(FocusNavigationDirection.Next);
 
@@ -90,7 +97,7 @@ namespace MySins
                     element.MoveFocus(request);
                 }
 
-                //await SinToBot(text, box);
+                await SinToBot(text, box);
             }
             else if (usedTextBoxesCount == 10)
             {
@@ -99,7 +106,7 @@ namespace MySins
                 string? text = box.Text;
                 box.IsReadOnly = true;
                 Debug.WriteLine("Визиваєтсья");
-                //await SinToBot(text, box);
+                await SinToBot(text, box);
             }
             usedTextBoxesCount++;
             Debug.WriteLine(usedTextBoxesCount);
@@ -135,6 +142,9 @@ namespace MySins
                 }
                 else if (answer.Trim() == "F")
                 {
+                    ItsNotASin notASin = new ItsNotASin();
+                    notASin.Show();
+                    box.Text = "";
                     box.IsReadOnly = false;
                 }
                 else
@@ -148,7 +158,7 @@ namespace MySins
 
         private void EmojesAndBackgroundChanges(int targetCount)
         {
-            if(targetCount <= 4)
+            if(targetCount <= 3)
             {
                 Smile.Visibility = Visibility.Visible;
                 Normal.Visibility = Visibility.Hidden;
@@ -156,7 +166,7 @@ namespace MySins
 
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/heaven.png"));
             }
-            else if(targetCount >= 5 && targetCount <= 8)
+            else if(targetCount >= 4 && targetCount <= 8)
             {
                 Smile.Visibility = Visibility.Hidden;
                 Normal.Visibility = Visibility.Visible;
