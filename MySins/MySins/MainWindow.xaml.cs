@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using System.Windows.Resources;
+using System.Text.RegularExpressions;
 
 
 //якщо не гріх або якщо нічого не ввів, то очистити поле
@@ -25,6 +27,7 @@ namespace MySins
     {
         public int usedTextBoxesCount = 0;
         public int sinsCount = 0;
+        public string time = "";
         private ChatSession chatSession;
 
         public MainWindow()
@@ -115,18 +118,40 @@ namespace MySins
         private async Task SinToBot(string message, TextBox targetBox)
         {
             TextBox box = targetBox;
-
-            if(chatSession == null)
+            GenerateContentResponse? responce = null;;
+            if (chatSession == null)
             {
                 return;
             }
+            try 
+            {
+                responce = await chatSession.GenerateContentAsync($"Нагадую, відповідай лише T або F. Більше нічого. Гріх: {message}");
+                string? reply = responce.Text();
+                SinCounting(reply, box);
 
-            var responce = await chatSession.GenerateContentAsync($"Нагадую, відповідай лише T або F. Більше нічого. Гріх: {message}");
+                Debug.WriteLine(reply);
+            }
+            catch(Exception ex)
+            {
+                if(ex.Message.Contains("RESOURCE_EXHAUSTED"))
+                {
+                    time = ParseSeconds(ex.Message);
 
-            string? reply = responce.Text();
-            SinCounting(reply, box);
+                    RateLimitWindow rateLimit = new RateLimitWindow(time);
+                    rateLimit.Show();
+                    Debug.WriteLine(time);
+                }
+            }
+        }
 
-            Debug.WriteLine(reply);
+        private string ParseSeconds(string str)
+        {
+            var match = Regex.Match(str, @"Please retry in ([0-9.]+s)");
+            if(match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+            return "";
         }
 
         private void SinCounting(string answer, TextBox targetBox)

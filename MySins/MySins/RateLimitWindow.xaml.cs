@@ -12,13 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace MySins
 {
-    public partial class MessageWindowNoAPIKey : Window
+    /// <summary>
+    /// Interaction logic for RateLimitWindow.xaml
+    /// </summary>
+    public partial class RateLimitWindow : Window
     {
-        public MessageWindowNoAPIKey()
+        public RateLimitWindow(string time)
         {
             InitializeComponent();
+            TimeTextBlock.Text += " " + time;
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            CloseAndEnabledWindow();
+        }
+
+        private void CloseAndEnabledWindow()
+        {
+            if (Owner is MainWindow mainWindow)
+            {
+                mainWindow.ImmaConfess.IsEnabled = true;
+            }
+            Close();
         }
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
@@ -32,7 +51,5 @@ namespace MySins
             System.Diagnostics.Process.Start(psi);
             e.Handled = true;
         }
-
-
     }
 }
