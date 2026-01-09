@@ -20,6 +20,8 @@ using System.Text.RegularExpressions;
 
 //якщо не гріх або якщо нічого не ввів, то очистити поле
 //вікно про випадок коли не підлкючена AI
+//збереження  данних до БД (перший запуск?)
+//вставка АПІ при першому запуску
 
 namespace MySins
 {
@@ -28,6 +30,7 @@ namespace MySins
         public int usedTextBoxesCount = 0;
         public int sinsCount = 0;
         public string time = "";
+        public bool isFirstStart = true;
         private ChatSession chatSession;
 
         public MainWindow()
@@ -52,19 +55,28 @@ namespace MySins
 
         private async Task GoogleModel()
         {
-            string ApiKeyFromFile = LoadApiKey();
-            var googleApiKey = new GoogleAi(ApiKeyFromFile);
-            var model = googleApiKey.CreateGenerativeModel("models/gemini-2.5-flash");
-            chatSession = model.StartChat(new List<Content>
+            try
             {
+                string ApiKeyFromFile = LoadApiKey();
+                var googleApiKey = new GoogleAi(ApiKeyFromFile);
+                var model = googleApiKey.CreateGenerativeModel("models/gemini-2.5-flash");
+                chatSession = model.StartChat(new List<Content>
+                {
                 new Content
                 {
                     Role = "user",
                     Parts = new List<Part>{new Part{Text ="Ти відповідаєш виключно 'T' або 'F'. Ніколи не додаєш пояснень. Якщо питання не дозволяє відповісти 'T/F' — відповідай 'F'."}}
                 }
-            });
-            var baseResponse = await chatSession.GenerateContentAsync("Я зараз буду описувати тобі гріхи по черзі, а ти мусиш відповідати лише T/F чи це є гріхом чи ні. Надавай відповіді згідно християнської етики. У відповідь на це повідомлення дай лише відповідь - Зрозуміло. А далі лише відповідай T або F і нічого інакше. ");
-            Debug.WriteLine(baseResponse.Text());
+                });
+                var baseResponse = await chatSession.GenerateContentAsync("Я зараз буду описувати тобі гріхи по черзі, а ти мусиш відповідати лише T/F чи це є гріхом чи ні. Надавай відповіді згідно християнської етики. У відповідь на це повідомлення дай лише відповідь - Зрозуміло. А далі лише відповідай T або F і нічого інакше. ");
+                Debug.WriteLine(baseResponse.Text());
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+                new MessageErrorSomethigWithGemini().Show();
+            }
+            
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
