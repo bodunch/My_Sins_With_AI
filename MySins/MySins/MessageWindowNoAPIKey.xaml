@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:MySins"
         mc:Ignorable="d"
         Title="MessageWindowNoAPIKey" Height="678" Width="352"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="#f3ba00">
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,7 +28,7 @@
             Grid.Column="1"
             Grid.Row="1"
             Text="error: No access to API key"
-            FontFamily="Arial"
+            FontFamily="Consolas"
             TextWrapping="Wrap"
             TextAlignment="Center"
             HorizontalAlignment="Center"
@@ -38,7 +39,7 @@
             Grid.Column="1"
             Grid.Row="3"
             Text="For more detailed information, please refer to our repository on GitHub:"
-            FontFamily="Arial"
+            FontFamily="Consolas"
             TextWrapping="Wrap"
             TextAlignment="Center"
             HorizontalAlignment="Center"
@@ -52,13 +53,9 @@
             TextAlignment="Center"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            FontSize="15">
+            FontSize="15"
+            FontFamily="Consolas">
             <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/bodunch/My_Sins_With_AI">link</Hyperlink>
         </TextBlock>
-
-        <Grid.Background>
-            <ImageBrush
-                ImageSource="/Images/MessageWindow.png"/>
-        </Grid.Background>
     </Grid>
 </Window>
