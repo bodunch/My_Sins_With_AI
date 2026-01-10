@@ -35,9 +35,10 @@ namespace MySins
 
         public MainWindow()
         {
+            //закомітити це нахой
             Properties.Settings.Default.IsFirstRun = true;
             Properties.Settings.Default.Save();
-
+            
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }

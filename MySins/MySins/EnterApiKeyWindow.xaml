@@ -5,7 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MySins"
         mc:Ignorable="d"
-        Title="EnterApiKeyWindow" Height="450" Width="800">
+        Title="EnterApiKeyWindow" Height="250" Width="450"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="#f3ba00">
+
+    <Window.Resources>
+        <Style x:Key="RoundedTextBox" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="HoverButton">
+            <Setter Property="Background" Value="#CC757575"/>
+            <Setter Property="Foreground" Value="#FF382D15"/>
+            <Setter Property="BorderBrush" Value="#CC4E4E4E"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Heavy"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="10"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#99757575"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#99757575"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+        CaptionHeight="250"
+        ResizeBorderThickness="0"
+        GlassFrameThickness="0"
+        CornerRadius="15"/>
+    </WindowChrome.WindowChrome>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -15,22 +78,63 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
         <TextBox
             Grid.Column="1"
-            Grid.Row="1"
+            Grid.Row="3"
             x:Name="EnterAPI"
-            />
+            BorderThickness="2"
+            Background="#80FFFFFF"
+            BorderBrush="#807D7D7D"
+            Foreground="Black"
+            FontSize="18"
+            FontFamily="Consolas"
+            TextWrapping="Wrap"
+            VerticalContentAlignment="Center"
+            Style="{StaticResource RoundedTextBox}"
+            WindowChrome.IsHitTestVisibleInChrome="True"/>
 
         <Button
             Grid.Column="1"
-            Grid.Row="3"
+            Grid.Row="5"
             x:Name="AprooveAPI"
-            Click="Approved_APIKey"/>
+            Click="Approved_APIKey"
+            Style="{StaticResource HoverButton}"
+            Content="Ok"
+            Margin="30, 15, 30, 15"
+            WindowChrome.IsHitTestVisibleInChrome="True"/>
+
+        <Button
+            Grid.Column="2"
+            Grid.Row="0"
+            Style="{StaticResource HoverButton}"
+            Width="30"
+            Height="30"
+            Margin="0, 5, 5, 0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="X"
+            WindowChrome.IsHitTestVisibleInChrome="True"
+            Click="CloseWindow"/>
+
+        <TextBlock
+            Grid.Column="1"
+            Grid.Row="1"
+            Text="Enter your API Key"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            FontSize="17"
+            FontFamily="Consolas"
+            FontWeight="Heavy"
+            Foreground="#FF382D15"/>
     </Grid>
 </Window>
