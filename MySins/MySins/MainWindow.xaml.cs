@@ -16,10 +16,9 @@ using System.Windows.Shapes;
 using System.Linq;
 using System.Windows.Resources;
 using System.Text.RegularExpressions;
+using System.Windows.Media.Animation;
 
 
-//якщо не гріх або якщо нічого не ввів, то очистити поле
-//вікно про випадок коли не підлкючена AI
 //збереження  данних до БД (перший запуск?)
 //вставка АПІ при першому запуску
 
@@ -31,28 +30,80 @@ namespace MySins
         public int sinsCount = 0;
         public string time = "";
         public bool isFirstStart = true;
+
         private ChatSession chatSession;
 
         public MainWindow()
         {
-            //надбудова щоб ця хуйня не запускала основне вікно без перевірки
-            if (!File.Exists("My_API_Key.txt"))
+            Properties.Settings.Default.IsFirstRun = true;
+            Properties.Settings.Default.Save();
+
+            InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.IsFirstRun)
             {
-                new MessageWindowNoAPIKey().Show();
-                Close();
-                return;
+                if (!Directory.Exists(TakeDirectoryAPI()))
+                    Directory.CreateDirectory(TakeDirectoryAPI());
+
+                if (!File.Exists(TakeFileAPI()))
+                {
+                    var enterWindow = new EnterApiKeyWindow();
+                    bool? res = enterWindow.ShowDialog();
+
+                    if (res == true && IsRealApiKey(enterWindow.ApiKey))
+                    {
+                        File.WriteAllText(TakeFileAPI(), enterWindow.ApiKey);
+                    }
+                    else if(!IsRealApiKey(enterWindow.ApiKey))
+                    {
+                        //якщо файл з неправильним ключом то нахй його делітнути. А ще цей кусок треба перемістити бо це відтворюється тільки при першому запуску
+                        File.Delete(TakeFileAPI());
+                    }
+                    else
+                    {
+                        //якщо немає ключа чота тут намутить помилку
+                        Close();
+                        return;
+                    }
+                }
+                //додати це коли буде йти на прод
+                //Properties.Settings.Default.IsFirstRun = false;
+                //Properties.Settings.Default.Save();
             }
-           
-             InitializeComponent();
-             _ = GoogleModel();
+            //тут запуск моделі
+            await GoogleModel();
+        }
+
+        private bool IsRealApiKey(string key)
+        {
+            return (key.Length == 39 && key.StartsWith("AIza") && !string.IsNullOrWhiteSpace(key));
+        }
+
+        public string TakeDirectoryAPI()
+        {
+            //шлях до директорії з апі файлом
+            string appDataPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "MySins");
+            return appDataPath;
+        }
+
+        public string TakeFileAPI()
+        {
+            //шлях до ключа
+            string appDataPath = TakeDirectoryAPI();
+            string apiKeyPath = System.IO.Path.Combine(appDataPath, "My_API_Key.txt");
+            return apiKeyPath;
         }
 
         public static string LoadApiKey()
         {
-            string filePath = "My_API_Key.txt";
+            string filePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData),"MySins","My_API_Key.txt");
             return File.ReadAllText(filePath).Trim();
         }
-
+        
         private async Task GoogleModel()
         {
             try
@@ -62,12 +113,12 @@ namespace MySins
                 var model = googleApiKey.CreateGenerativeModel("models/gemini-2.5-flash");
                 chatSession = model.StartChat(new List<Content>
                 {
-                new Content
-                {
-                    Role = "user",
-                    Parts = new List<Part>{new Part{Text ="Ти відповідаєш виключно 'T' або 'F'. Ніколи не додаєш пояснень. Якщо питання не дозволяє відповісти 'T/F' — відповідай 'F'."}}
-                }
-                });
+                    new Content
+                    {
+                        Role = "user",
+                        Parts = new List<Part>{new Part{Text ="Ти відповідаєш виключно 'T' або 'F'. Ніколи не додаєш пояснень. Якщо питання не дозволяє відповісти 'T/F' — відповідай 'F'."}}
+                    }
+                    });
                 var baseResponse = await chatSession.GenerateContentAsync("Я зараз буду описувати тобі гріхи по черзі, а ти мусиш відповідати лише T/F чи це є гріхом чи ні. Надавай відповіді згідно християнської етики. У відповідь на це повідомлення дай лише відповідь - Зрозуміло. А далі лише відповідай T або F і нічого інакше. ");
                 Debug.WriteLine(baseResponse.Text());
             }
