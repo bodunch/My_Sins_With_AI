@@ -29,9 +29,29 @@ namespace MySins
 
         private void Approved_APIKey(object sender, RoutedEventArgs e)
         {
-            ApiKey = EnterAPI.Text.Trim();
-            DialogResult = true;
-            Close();
+            string key = EnterAPI.Text.Trim();
+            if(IsRealApiKey(key))
+            {
+                ApiKey = EnterAPI.Text.Trim();
+                DialogResult = true;
+                Close();
+            }
+        }
+
+        private bool IsRealApiKey(string apiKey)
+        {
+            if(!(apiKey.Length == 39) || !(apiKey.StartsWith("AIza")) || (string.IsNullOrWhiteSpace(apiKey)))
+            {
+                IsNotRealApiKey notApi = new IsNotRealApiKey();
+                notApi.Show();
+                ApiKey = "";
+                EnterAPI.Text = "";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
