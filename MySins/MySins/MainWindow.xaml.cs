@@ -15,8 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
 using System.Windows.Resources;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Animation;
+using MySins.APIKey;
 
 
 //збереження  данних до БД (перший запуск?)
@@ -60,7 +62,7 @@ namespace MySins
 
                     if (res == true && IsRealApiKey(enterWindow.ApiKey))
                     {
-                        File.WriteAllText(TakeFileAPI(), enterWindow.ApiKey);
+                        File.WriteAllText(TakeFileAPI(), Encrypted_Decrypted.Encryption(enterWindow.ApiKey));
                     }
                     else if(!IsRealApiKey(enterWindow.ApiKey))
                     {
@@ -112,7 +114,7 @@ namespace MySins
         {
             try
             {
-                string ApiKeyFromFile = LoadApiKey();
+                string ApiKeyFromFile = Encrypted_Decrypted.Decryption(LoadApiKey());
                 var googleApiKey = new GoogleAi(ApiKeyFromFile);
                 var model = googleApiKey.CreateGenerativeModel("models/gemini-2.5-flash");
                 chatSession = model.StartChat(new List<Content>

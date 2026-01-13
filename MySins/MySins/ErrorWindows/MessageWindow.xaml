@@ -52,12 +52,13 @@
         <TextBlock
             Grid.Column="1"
             Grid.Row="0"
-            Text="Please enter the password correctly, no need to try to break the program!"
+            Text="Please enter the sin correctly, no need to try to break the program!"
             TextWrapping="Wrap"
             TextAlignment="Center"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="25"/>
+            FontSize="25"
+            FontFamily="Consolas"/>
 
         <Button 
             Grid.Column="1"
@@ -73,7 +74,8 @@
             Grid.Column="1"
             Grid.Row="3">
             <TextBlock
-                TextWrapping="Wrap">
+                TextWrapping="Wrap"
+                FontFamily="Consolas">
                 My friend, if you managed to get the AI assistant to give you incorrect answers, then 
                 I (the programmer who created this application) think that you are doing something wrong with your life. 
                 Try walking on the grass, taking a walk, even if just a little, get a girlfriend, a dog, a child. 
