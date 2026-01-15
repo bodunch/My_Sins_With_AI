@@ -32,9 +32,11 @@ namespace MySins
     public partial class MainWindow : Window
     {
         public int usedTextBoxesCount = 0;
-        public int sinsCount = 0;
+        public int sinsCount = Properties.Settings.Default.SinsCount;
+        
         public string time = "";
-        public bool isFirstStart = true;
+        //public bool isFirstStart = true;
+        //запис з старту програми
 
         private ChatSession chatSession;
 
@@ -45,7 +47,9 @@ namespace MySins
             Properties.Settings.Default.Save();
             
             InitializeComponent();
+            //метод в якому йде завантаження інтерфейсу
             Loaded += MainWindow_Loaded;
+            AppState();
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -86,6 +90,7 @@ namespace MySins
 
         private bool IsRealApiKey(string key)
         {
+            //додаткова перевірка ключа
             return (key.Length == 39 && key.StartsWith("AIza") && !string.IsNullOrWhiteSpace(key));
         }
 
@@ -114,6 +119,7 @@ namespace MySins
         {
             try
             {
+                //дешифрування ключа
                 string ApiKeyFromFile = Encrypted_Decrypted.Decryption(LoadApiKey());
                 var googleApiKey = new GoogleAi(ApiKeyFromFile);
                 var model = googleApiKey.CreateGenerativeModel("models/gemini-2.5-flash");
@@ -161,7 +167,9 @@ namespace MySins
                 var request = new TraversalRequest(FocusNavigationDirection.Next);
 
                 string? text = box.Text;
+                //збереження
                 box.IsReadOnly = true;
+                //тут тоже
 
                 UIElement? element = sender as UIElement;
                 if (element != null && element is TextBox)
@@ -187,6 +195,7 @@ namespace MySins
         private async Task SinToBot(string message, TextBox targetBox)
         {
             TextBox box = targetBox;
+            AppBoxesStateField(box);
             GenerateContentResponse? responce = null;;
             if (chatSession == null)
             {
@@ -213,6 +222,7 @@ namespace MySins
             }
         }
 
+        //парсинг для помилки
         private string ParseSeconds(string str)
         {
             var match = Regex.Match(str, @"Please retry in ([0-9.]+s)");
@@ -233,6 +243,8 @@ namespace MySins
                     sinsCount++;
                     Debug.WriteLine(sinsCount);
                     EmojesAndBackgroundChanges(sinsCount);
+                    Properties.Settings.Default.SinsCount = sinsCount;
+                    Properties.Settings.Default.Save();
                 }
                 else if (answer.Trim() == "F")
                 {
@@ -247,6 +259,7 @@ namespace MySins
                     MessageWindow openWindow = new MessageWindow();
                     openWindow.Show();
                 }
+                //збереження числа
             }
         }
 
@@ -274,6 +287,7 @@ namespace MySins
 
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/hell.png"));
             }
+            //збереження
         }
 
         private void ImmaConfess_Click(object sender, RoutedEventArgs e)
@@ -282,6 +296,8 @@ namespace MySins
             window.Owner = this;
             window.Show();
             ImmaConfess.IsEnabled = false;
+            //збереження
+            AppBoxesStateClean();
         }
 
         private void ProgramExit(object sender, RoutedEventArgs e)
@@ -324,6 +340,57 @@ namespace MySins
                         yield return grandChild;
                 }
             }
+        }
+
+        private void AppBoxesStateField(TextBox box)
+        {
+            switch (box.Name)
+            {
+                case "Box0": Properties.Settings.Default.Box0 = box.Text; break;
+                case "Box1": Properties.Settings.Default.Box1 = box.Text; break;
+                case "Box2": Properties.Settings.Default.Box2 = box.Text; break;
+                case "Box3": Properties.Settings.Default.Box3 = box.Text; break;
+                case "Box4": Properties.Settings.Default.Box4 = box.Text; break;
+                case "Box5": Properties.Settings.Default.Box5 = box.Text; break;
+                case "Box6": Properties.Settings.Default.Box6 = box.Text; break;
+                case "Box7": Properties.Settings.Default.Box7 = box.Text; break;
+                case "Box8": Properties.Settings.Default.Box8 = box.Text; break;
+                case "Box9": Properties.Settings.Default.Box9 = box.Text; break;
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
+        private void AppBoxesStateClean()
+        {
+            Properties.Settings.Default.Box0 = " ";
+            Properties.Settings.Default.Box1 = " ";
+            Properties.Settings.Default.Box2 = " ";
+            Properties.Settings.Default.Box3 = " ";
+            Properties.Settings.Default.Box4 = " ";
+            Properties.Settings.Default.Box5 = " ";
+            Properties.Settings.Default.Box6 = " ";
+            Properties.Settings.Default.Box7 = " ";
+            Properties.Settings.Default.Box8 = " ";
+            Properties.Settings.Default.Box9 = " ";
+
+            Properties.Settings.Default.Save();
+        }
+
+        private void AppState()
+        {
+            Box0.Text = Properties.Settings.Default.Box0;
+            Box1.Text = Properties.Settings.Default.Box1;
+            Box2.Text = Properties.Settings.Default.Box2;
+            Box3.Text = Properties.Settings.Default.Box3;
+            Box4.Text = Properties.Settings.Default.Box4;
+            Box5.Text = Properties.Settings.Default.Box5;
+            Box6.Text = Properties.Settings.Default.Box6;
+            Box7.Text = Properties.Settings.Default.Box7;
+            Box8.Text = Properties.Settings.Default.Box8;
+            Box9.Text = Properties.Settings.Default.Box9;
+
+            EmojesAndBackgroundChanges(sinsCount);
         }
     }
 }
