@@ -280,7 +280,7 @@
             FontSize="18"
             FontWeight="Heavy"
             VerticalAlignment="Center"
-            Margin="20, 0, 0, 5"
+            Margin="40, 0, 0, 5"
             />
 
         <Button
@@ -339,6 +339,13 @@
             Grid.Row="1"
             x:Name="Smile"
             Source="Images/Smile.png"/>
+
+        <Image
+            Grid.Column="0"
+            Grid.Row="0"
+            Margin="5, 0, 0, 5"
+            HorizontalAlignment="Left"
+            Source="Images/logo.png"/>
 
         <Grid.Background>
             <ImageBrush 
