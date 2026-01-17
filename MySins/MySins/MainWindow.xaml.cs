@@ -392,5 +392,17 @@ namespace MySins
 
             EmojesAndBackgroundChanges(sinsCount);
         }
+
+        private void OpenSettingsWindow(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.Show();
+        }
+
+        private void OpenDevelopersWindow(object sender, RoutedEventArgs e)
+        {
+            DevelopersWindow dw = new DevelopersWindow();
+            dw.Show();
+        }
     }
 }

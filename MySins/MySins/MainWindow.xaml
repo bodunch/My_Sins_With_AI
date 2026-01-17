@@ -311,7 +311,8 @@
             Grid.Row="23" 
             Width="80"
             Style="{StaticResource HoverButton}"
-            HorizontalAlignment="Right">
+            HorizontalAlignment="Right"
+            Click="OpenSettingsWindow">
                 <Image Source="Images/IconSettings.png"/>
         </Button>
 
@@ -320,7 +321,8 @@
             Grid.Row="23" 
             Width="80"
             Style="{StaticResource HoverButton}"
-            HorizontalAlignment="Left">
+            HorizontalAlignment="Left"
+            Click="OpenDevelopersWindow">
             <Image Source="/Images/IconDevs.png"/>
         </Button>
 
