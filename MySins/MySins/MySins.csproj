@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="Images\heaven.png" />
     <None Remove="Images\hell.png" />
+    <None Remove="Images\IconDevs.png" />
+    <None Remove="Images\IconSettings.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\MessageWindow.png" />
     <None Remove="Images\Normal.png" />
@@ -26,6 +28,8 @@
   <ItemGroup>
     <Resource Include="Images\heaven.png" />
     <Resource Include="Images\hell.png" />
+    <Resource Include="Images\IconDevs.png" />
+    <Resource Include="Images\IconSettings.png" />
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\MessageWindow.png" />
     <Resource Include="Images\Normal.png" />
