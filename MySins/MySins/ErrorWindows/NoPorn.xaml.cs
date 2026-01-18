@@ -15,25 +15,13 @@ using System.Windows.Shapes;
 namespace MySins
 {
     /// <summary>
-    /// Interaction logic for DevelopersWindow.xaml
+    /// Interaction logic for NoPorn.xaml
     /// </summary>
-    public partial class DevelopersWindow : Window
+    public partial class NoPorn : Window
     {
-        public DevelopersWindow()
+        public NoPorn()
         {
             InitializeComponent();
-        }
-
-        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
-        {
-            var psi = new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = e.Uri.AbsoluteUri,
-                UseShellExecute = true
-            };
-
-            System.Diagnostics.Process.Start(psi);
-            e.Handled = true;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
@@ -48,12 +36,6 @@ namespace MySins
                 mainWindow.ImmaConfess.IsEnabled = true;
             }
             Close();
-        }
-
-        private void OpenNoWindow(object sender, RoutedEventArgs e)
-        {
-            NoPorn np = new NoPorn();
-            np.Show();
         }
     }
 }
