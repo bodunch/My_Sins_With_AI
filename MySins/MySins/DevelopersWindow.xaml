@@ -137,6 +137,5 @@
             TextDecorations="Underline"
             WindowChrome.IsHitTestVisibleInChrome="True">
         </TextBlock>
-
     </Grid>
 </Window>
