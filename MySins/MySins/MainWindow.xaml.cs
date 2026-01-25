@@ -20,13 +20,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Media.Animation;
 using MySins.APIKey;
 
-
-//збереження  данних до БД (перший запуск?)
-//вставка АПІ при першому запуску
-//шифрування файлу
-//перевірка чи це норм ключ
-
-
 namespace MySins
 {
     public partial class MainWindow : Window
@@ -42,7 +35,6 @@ namespace MySins
 
         public MainWindow()
         {
-            //закомітити це нахой
             Properties.Settings.Default.IsFirstRun = true;
             Properties.Settings.Default.Save();
             
@@ -80,9 +72,6 @@ namespace MySins
                         return;
                     }
                 }
-                //додати це коли буде йти на прод
-                //Properties.Settings.Default.IsFirstRun = false;
-                //Properties.Settings.Default.Save();
             }
             //тут запуск моделі
             await GoogleModel();
@@ -167,9 +156,7 @@ namespace MySins
                 var request = new TraversalRequest(FocusNavigationDirection.Next);
 
                 string? text = box.Text;
-                //збереження
                 box.IsReadOnly = true;
-                //тут тоже
 
                 UIElement? element = sender as UIElement;
                 if (element != null && element is TextBox)
@@ -259,7 +246,6 @@ namespace MySins
                     MessageWindow openWindow = new MessageWindow();
                     openWindow.Show();
                 }
-                //збереження числа
             }
         }
 
@@ -287,7 +273,6 @@ namespace MySins
 
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/hell.png"));
             }
-            //збереження
         }
 
         private void ImmaConfess_Click(object sender, RoutedEventArgs e)
@@ -296,7 +281,6 @@ namespace MySins
             window.Owner = this;
             window.Show();
             ImmaConfess.IsEnabled = false;
-            //збереження
             AppBoxesStateClean();
         }
 
@@ -315,6 +299,9 @@ namespace MySins
         {
             usedTextBoxesCount = 0;
             sinsCount = 0;
+            EmojesAndBackgroundChanges(sinsCount);
+            Properties.Settings.Default.SinsCount = 0;
+            Properties.Settings.Default.Save();
             Box0.Focus();
             Box0.Select(0, 0);
             List<TextBox> allTextBoxes = FindVisualChildren<TextBox>(this).ToList();
