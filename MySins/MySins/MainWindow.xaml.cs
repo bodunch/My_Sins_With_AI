@@ -259,18 +259,20 @@ namespace MySins
 
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/heaven.png"));
             }
-            else if(targetCount >= 4 && targetCount <= 8)
+            else if(targetCount >= 3 && targetCount <= 7)
             {
                 Smile.Visibility = Visibility.Hidden;
                 Normal.Visibility = Visibility.Visible;
+                Sad.Visibility = Visibility.Hidden;
 
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/so so.png"));
             }
-            else
+            else if(targetCount >= 8)
             {
+                Smile.Visibility = Visibility.Hidden;
                 Normal.Visibility = Visibility.Hidden;
                 Sad.Visibility = Visibility.Visible;
-
+                
                 Background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/hell.png"));
             }
         }
