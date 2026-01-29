@@ -26,9 +26,9 @@ It's very simple: you just enter your sin in the appropriate field and press **E
 
 **If you have too many sins, the app will start to change, reminding you that you need to confess and stop sinning:**
 
-<img width="300" alt="image" src="https://github.com/user-attachments/assets/b04668e1-3ad6-4828-8114-193e02bca1c0" />
-<img width="300" alt="image" src="https://github.com/user-attachments/assets/2d7fd078-18f0-4eef-ad93-c78145c77b58" /> 
-<img width="300" alt="image" src="https://github.com/user-attachments/assets/180f2482-24cb-4c5b-ad5a-945704809be3" />
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/b04668e1-3ad6-4828-8114-193e02bca1c0" />
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/2d7fd078-18f0-4eef-ad93-c78145c77b58" /> 
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/180f2482-24cb-4c5b-ad5a-945704809be3" />
 
 ### But how can we cleanse ourselves of our sins?
 To do this, simply click on button **"I Confess My Sins"**, and then, if you have truly confessed, confirm this by clicking **"Yes"**.
